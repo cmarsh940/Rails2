@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= yield :title %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <%= yield :jumbo %>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <%= render "shared/alerts" %>
+        <ul class="nav nav-pills">
+          <div class="pull-right">
+            <div style="display: inline-block; margin-right: 10px;">
+              <%= yield :nav %>
+            </div>
+            <div style="display: inline-block;">
+              <% if current_user %>
+                <form action="/sessions/<%=current_user.id%>" method="post">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <input type="hidden" name="_method" value="delete">
+                  <input class="btn btn-default" type="submit" value="Log Out">
+                </form>
+              <% end %>
+            </div>
+          </div>
+        </ul>
+        <div class="col-12"><%= yield %></div>
+      </div>
+    </div>
+  </body>
+</html>

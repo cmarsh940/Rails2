@@ -1,0 +1,112 @@
+<% content_for :title, "Your Dashboard" %>
+
+
+<h1>Hello <%= current_user.first_name %>.</h1>
+
+<% content_for :nav do %>
+  <a href="/user/<%= current_user.id %>">Edit My Profile</a>
+<% end %>
+<p>&nbsp;</p>
+
+<h3>Here are some of the events at your state:</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Host</th>
+      <th>Action/Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @state_events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.date.strftime("%b %d %Y") %></td>
+        <td>$<%= event.address %></td>
+        <td>$<%= event.user %></td>
+        <td>
+          Join/Joining
+          Cancel
+          Edit
+          Delete
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+
+<h3>Here are some of the events in other state:</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>State</th>
+      <th>Host</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @other_events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.date.strftime("%b %d %Y") %></td>
+        <td>$<%= event.address %></td>
+        <td>$<%= event.state %></td>
+        <td>$<%= event.user %></td>
+        <td>
+          Join/Joining
+          Cancel
+          Edit
+          Delete
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+
+<h1>Add Event</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form action="/events/" method="post" class="form-horizontal">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="event[name]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Date</label>
+      <div class="col-sm-9">
+        <input type="date" name="event[date]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Location</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="event[address]">
+      </div>
+      <div class="col-sm-3">
+        <select name="event[state]" class="form-control">
+          <option>CA</option>
+          <option>IL</option>
+          <option>TX</option>
+          <option>VA</option>
+          <option>WA</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <button type="submit" class="btn btn-primary">Add Event</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

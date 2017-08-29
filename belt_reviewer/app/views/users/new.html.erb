@@ -1,0 +1,92 @@
+<% content_for :title, "Welcome" %>
+
+<% content_for :jumbo do %>
+  <h1>Welcome, user</h1>
+  <p>Please log in or register to continue</p>
+<% end %>
+
+<% content_for :col1 do %>
+  <div class="col-sm-offset-3 col-sm-10">
+    <h1>Register</h1>
+  </div>
+  <form action="/users/" method="post" class="form-horizontal">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">First Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="user[first_name]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Last Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="user[last_name]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Email</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="user[email]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Location</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="user[address]">
+      </div>
+      <div class="col-sm-3">
+        <select name="user[state]" class="form-control">
+          <option>CA</option>
+          <option>IL</option>
+          <option>TX</option>
+          <option>VA</option>
+          <option>WA</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Password</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" name="user[password]">
+        <!-- <label>*Password should be at least 8 characters</label> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Confirm PW</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" name="user[password_confirmation]">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <button type="submit" class="btn btn-primary">Sign up</button>
+      </div>
+    </div>
+  </form>
+<% end %>
+
+<% content_for :col2 do %>
+  <div class="col-sm-offset-3 col-sm-10">
+    <h1>Login</h1>
+  </div>
+  <form action="/sessions/" method="post" class="form-horizontal">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Email</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="user[email]">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Password</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" name="user[password]">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </div>
+    </div>
+  </form>
+<% end %>
